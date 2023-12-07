@@ -1,0 +1,183 @@
+@import url("https://fonts.googleapis.com/css?family=PT+Serif:400,700&display=swap");
+
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "PT Serif", serif !important;
+}
+
+body {
+  background-color: #000;
+  color: #fff;
+}
+
+a {
+  color: #fff;
+}
+
+/* nav */
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 2rem;
+}
+
+nav .end {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+nav a {
+  margin: 0 1rem;
+  font-size: 16px;
+}
+
+/* main classes */
+
+.single-article-container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 45rem;
+  padding: 1rem;
+  min-height: 72vh;
+}
+
+.multiple-article-container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1030px;
+  min-height: 72vh;
+  margin-top: 4rem;
+}
+
+/* single article */
+
+article {
+  display: grid;
+  grid-gap: 1rem;
+}
+
+article .title {
+  font-size: 40px;
+  line-height: 48px;
+}
+
+article div {
+  display: flex;
+  align-items: center;
+}
+
+.meta-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.post-meta {
+  display: grid;
+}
+
+.post-meta p {
+  font-size: 14px;
+  margin: -0.3rem;
+}
+
+.avatar {
+  width: 50px;
+  border-radius: 100%;
+  margin-right: 1rem;
+}
+
+article p {
+  font-size: 21px;
+  line-height: 31px;
+}
+
+/* grid cards */
+
+.card {
+  /* background-color: #121212; */
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 2rem;
+}
+
+.card .title {
+  font-family: "Noto Sans" !important;
+  font-size: 25px;
+  font-weight: bold;
+  line-height: 35px;
+}
+
+.card .excrept {
+  font-family: "Noto Sans" !important;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.card .meta-container {
+  margin-top: 1rem;
+}
+
+.card .meta-container .date {
+  font-family: "Noto Sans" !important;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 10px;
+}
+
+.card-body .post-meta {
+  grid-gap: 12px;
+}
+
+/* footer */
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 2rem;
+}
+
+footer a {
+  margin: 0 1rem;
+}
+
+/* media query */
+
+@media screen and (max-width: 720px) {
+  nav {
+    display: grid;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  nav .end {
+    display: flex;
+    text-align: left;
+    justify-content: left;
+    padding-left: 0px;
+    margin-top: 1rem;
+    overflow-x: auto;
+  }
+  nav a {
+    margin: 10px 1rem;
+  }
+
+  nav .end a {
+    padding-right: 1rem;
+  }
+
+  footer {
+    flex-direction: column;
+    padding: 2rem 0rem;
+  }
+  footer a {
+    margin: 2rem 1rem;
+  }
+}
