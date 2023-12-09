@@ -79,11 +79,12 @@ article div {
 
 .post-meta {
   display: grid;
+  grid-gap: 2px; /* Increase this value to add more space */
 }
 
 .post-meta p {
   font-size: 14px;
-  margin: -0.3rem;
+  margin: 4px 0; /* Adjust the vertical margin as needed */
 }
 
 .avatar {
