@@ -6,6 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>GameKitTutorial</title>
   <link rel="stylesheet" href="css/styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-tomorrow.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.js"></script>
 </head>
 <body>
   <nav>
@@ -20,53 +22,97 @@
     </div>
   </nav>
   <main class="single-article-container">
-      <div class="meta-container">
-        <img class="avatar" src="assets/img/Caleb_Roe.jpeg" alt="Caleb Roe">
-        <img class="avatar" src="assets/img/Caleb_Roe.jpeg" alt="Cody Peyerk">
-        <div class="post-meta">
-          <p class="author">Caleb Roe | Cody Peyerk</p>
-          <p class="date">Dec 8, 2023 · 20 min read</p>
-        </div>
+    <div class="meta-container">
+      <img class="avatar" src="assets/img/Caleb_Roe.jpeg" alt="Caleb Roe">
+      <img class="avatar" src="assets/img/Caleb_Roe.jpeg" alt="Cody Peyerk">
+      <div class="post-meta">
+        <p class="author">Caleb Roe | Cody Peyerk</p>
+        <p class="date">Dec 8, 2023 · 20 min read</p>
       </div>
+    </div>
+    <div class="article-container">
       <section id="introduction">
         <h2>Introduction</h2>
-      <p class="content">
-      GameKit enriches iOS games by enabling social gaming features. 
-      It's crucial for engaging users in a more interactive and competitive environment. 
-      For a game like 2048, GameKit can significantly enhance the gaming experience 
-      by adding a social dimension through leaderboards and achievements, 
-      motivating players to improve their skills and engage more deeply with the game.
-      <br>
-      <br>
-      The 2048 game, a simple yet addictive puzzle, will integrate GameKit to enhance user 
-      engagement through the Game Center. We'll add achievements for reaching key milestones 
-      (like achieving the 2048 tile), and leaderboards to foster a competitive environment. 
-      This will not only increase the game’s replayability but also leverage the social aspect 
-      of gaming by allowing players to compare their scores with friends and the global player base.
-      <br>
-      <br>
-      We'll use the latest Xcode version and Swift 5, targeting iOS 14 and above. 
-      We'll guide you through setting up GameKit in your project, ensuring you have 
-      all the necessary tools and dependencies installed.
-    </section>
-    <section id="overview">
-      <h2>Overview</h2>
-      <p class="content">
-        <!-- Overview content goes here -->
-      </p>
-    </section>
-    <section id="integration">
-      <h2>Integration</h2>
-      <p class="content">
-        <!-- Integration content goes here -->
-      </p>
-    </section>
-    <section id="references">
-      <h2>References</h2>
-      <p class="content">
-        <!-- References content goes here -->
-      </p>
-    </section>
+        <br>
+        <p class="content">
+        <img src="assets/img/gamecenter.png" alt="Game Center">
+        <br>
+        GameKit enriches iOS games by enabling social gaming features. 
+        It's crucial for engaging users in a more interactive and competitive environment. 
+        For a game like 2048, GameKit can significantly enhance the gaming experience 
+        by adding a social dimension through leaderboards and achievements, 
+        motivating players to improve their skills and engage more deeply with the game.
+        <br>
+        <br>
+        The 2048 game, a simple yet addictive puzzle, will integrate GameKit to enhance user 
+        engagement through the Game Center. We'll add achievements for reaching key milestones 
+        (like achieving the 2048 tile), and leaderboards to foster a competitive environment. 
+        This will not only increase the game’s replayability but also leverage the social aspect 
+        of gaming by allowing players to compare their scores with friends and the global player base.
+        </p>
+        <br>
+        <br>
+      </section>
+      <section id="overview">
+        <h2>Overview</h2>
+        <br>
+        <p class="content">
+        This section will delve into the specifics of adding GameKit features to the 2048 game, 
+        demonstrating how to make a simple game more engaging and competitive.
+        </p>
+        <br>
+        <h3>Getting Started</h3>
+        <br>
+        <p class="content">
+          We'll use the latest Xcode version and Swift 5, targeting iOS 14 and above. 
+          We'll guide you through setting up GameKit in your project, 
+          ensuring you have all the necessary tools and dependencies installed.
+          <br>
+          In order to add Game Center to your app you will first need to create an app on App Store Connect. 
+          This will require that you have an Apple Developer account. Once you have logged in you will go 
+          to the “My Apps” section and create a new app. In this creation you will link the app using 
+          your unique “bundle identifier” which you can find inside your XCode project under “Signing & Capabilities.
+          <br>
+          <br>
+          <img src="assets/img/xcode_signup.PNG" alt="XCode Sign in">
+          <br>
+          While creating your app, make sure to give it permissions for “Game Center”. 
+          For the purposes of this tutorial the app will require no other permissions other than Game Center.
+          <br>
+          <br>
+          Now that your app has been created you will need to add Game Center to the app itself inside of Xcode. 
+          To do this you will again go to the “Signing & Capabilities” page under your project. Once here you will 
+          need to click on the “Team” dropdown menu and, if you haven’t added your account yet, you will need to 
+          add your account. After your account has been added you will need to select it in this dropdown menu. 
+          Now, you will click on the “+ Capability” button which can be found near the top-left of the image above.
+          <br>
+          <br>
+          <img src="assets/img/xcode_signup_2.PNG" alt="XCode Sign in">
+          <br>
+          This will bring up the capabilities search menu. You can either scroll through the options and find “Game Center” 
+          or you can search for it using the search bar. Once you locate it you will double click on it and that will add 
+          it to your project. Now you will be able to utilize GameKit inside of your project.
+          <br>
+          <br>
+        </p>
+      </section>
+      <section id="integration">
+        <h2>Integration</h2>
+        <p class="content">
+        <br>
+        <pre><code class="language-swift">
+          class GameCenterHandler: ObservableObject {
+          }          
+          </code></pre>
+        </p>
+      </section>
+      <section id="references">
+        <h2>References</h2>
+        <p class="content">
+          <!-- References content goes here -->
+        </p>
+      </section>
+    </div>
   </main>
   <footer>
     <a href="#">
