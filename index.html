@@ -6,8 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>GameKitTutorial</title>
   <link rel="stylesheet" href="css/styles.css">
-  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-tomorrow.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.js"></script>
+  <!-- Include the PrismJS stylesheet for styling -->
+  <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-okaidia.css" rel="stylesheet"/>
+  <!-- Include PrismJS and the language-specific component -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-swift.min.js"></script>
 </head>
 <body>
   <nav>
@@ -18,6 +21,8 @@
       <a href="#introduction">Introduction</a>
       <a href="#overview">Overview</a>
       <a href="#integration">Integration</a>
+      <a href="#leaderboards">Leaderboards</a>
+      <a href="#achievements">Achievements</a>
       <a href="#references">References</a>
     </div>
   </nav>
@@ -100,10 +105,102 @@
         <h2>Integration</h2>
         <p class="content">
         <br>
+        For ease of access we recommend putting the Game Center code in its own file and class. 
+        This step is optional but will make the code much more readable and clean. You will then be able 
+        to create @StateObject variables of the class in the other files that need to access the functions and data. 
+        The class will need to be of type ObservableObject and can be outlined like so:
+        <br>
+        <br>
         <pre><code class="language-swift">
-          class GameCenterHandler: ObservableObject {
-          }          
-          </code></pre>
+          class GameCenterHandler: ObservableObject {}          
+        </code></pre>
+        <br>
+        When creating a separate class for all of the Game Center handling like this 
+        it is important  to make sure that only a single instance of the class is created 
+        and passed around. To accomplish this we will create a singleton like so:
+        <br>
+        <br>
+        <pre><code class="language-swift">
+          static let shared = GameCenterHandler()         
+        </code></pre>
+        <br>
+        This “shared” variable will allow us to access this single instance of the GameCenterHandler class. 
+        From here we will need two more variables before we can authenticate our player. Those being a variable
+        containing the local player themself and a variable of type @Published to track whether the 
+        authentication view needs to be presented. This can be done like so:
+        <br>
+        <br> 
+        <pre><code class="language-swift">
+          var localPlayer = GKLocalPlayer.local
+          @Published var isPresentingAuthView = false
+        </code></pre>
+        <br> 
+        From here we are now ready to authenticate the local player. This is done using 
+        the GKLocalPlayer.local instance property of “.authenticateHandler”. The authenticateHandler 
+        takes a completionHandler that gives two parameters with them being a viewController and an error. 
+        The viewController will have a value containing the view for the Game Center authentication if the 
+        user is not authenticated and a value of nil if they are authenticated. Likewise, the error will 
+        have a value if there is an error or nil if there is none. We can assign this property inside of the init() function like so:
+        <br>
+        <br> 
+        <pre><code class="language-swift">
+          var localPlayer = GKLocalPlayer.local
+          @Published var isPresentingAuthView = false
+        </code></pre>
+        <br>
+        From here we are now ready to authenticate the local player. This is done using the GKLocalPlayer.local
+        instance property of “.authenticateHandler”. The authenticateHandler takes a completionHandler that 
+        gives two parameters with them being a viewController and an error. The viewController will have a 
+        value containing the view for the Game Center authentication if the user is not authenticated and a 
+        value of nil if they are authenticated. Likewise, the error will have a value if there is an error 
+        or nil if there is none. We can assign this property inside of the init() function like so:
+        <br>
+        <br> 
+        <pre><code class="language-swift">
+          init() {
+            localPlayer.authenticateHandler = { viewController, error in
+                if viewController != nil {
+                    // Set value to present view controller to authenticate user
+                    GameCenterHandler.shared.isPresentingAuthView = true
+                } else if self.localPlayer.isAuthenticated {
+                     // Player is authenticated
+                } else {
+                    // Handle error
+                    print(error?.localizedDescription ?? "")
+                    return
+                }
+            }
+        }    
+        </code></pre>
+        <br>
+        There are four main states we need to check for inside of the authenticateHandler, 
+        with those being: if the viewController is not null, if the user is authenticated, 
+        if the user isn’t authenticated, and if there is an error. The first is so we can 
+        set the flag variable we created earlier to true in order to bring up the Game Center
+        authentication view. Next, we check if the player is authenticated or not and inside 
+        of this check we can check for if the user has some restrictions placed on their Game 
+        Center account. These restrictions can be things like multiplayer restrictions or social 
+        restrictions. Next, we check if the player is not authenticated. In this we can choose to 
+        warn the user or limit game functionality or force them to retry. Finally, we check to see 
+        if there is an error and handle it properly. The order of these checks are somewhat 
+        interchangeable but in general you should check for the viewController before checking 
+        if the user is authenticated. You may also omit some of them if you have no need to do 
+        anything more inside of the check such as how the check for if the player is authenticated 
+        is empty in the example code above.
+        <br>
+        <br>
+        </p>
+      </section>
+      <section id="leaderboards">
+        <h2>Leaderboards</h2>
+        <p class="content">
+          <!-- References content goes here -->
+        </p>
+      </section>
+      <section id="achievements">
+        <h2>Achievements</h2>
+        <p class="content">
+          <!-- References content goes here -->
         </p>
       </section>
       <section id="references">
