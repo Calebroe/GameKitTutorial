@@ -14,7 +14,7 @@ body {
 }
 
 a {
-  color: #ffdb3c;
+  color: #177cca;
 }
 
 /* nav */
@@ -58,8 +58,8 @@ nav a {
 }
 /* single article */
 .article-title {
-  font-size: 60px; /* This is a large size for the title, adjust as needed */
-  color: #3d8affb1; /* Optional: Adjust the color to make the title stand out */
+  font-size: 70px; /* This is a large size for the title, adjust as needed */
+  color: #57ffe6b1; /* Optional: Adjust the color to make the title stand out */
   text-align: center; /* Center the title */
   margin-bottom: 1em; /* Add some space below the title */
 }
@@ -69,18 +69,13 @@ nav a {
   grid-gap: 1rem;
 }
 
-article .title {
-  font-size: 60px;
-  line-height: 48px;
-}
-
 .article div {
   display: flex;
   align-items: center;
 }
 
 h2 {
-  font-size: 60px; /* Increased from your current setting, adjust as needed */
+  font-size: 50px; /* Increased from your current setting, adjust as needed */
   margin-bottom: 0.5em; /* Adds some space below the section titles */
 }
 
@@ -101,7 +96,7 @@ h3 {
 }
 
 .post-meta p {
-  font-size:40px;
+  font-size:30px;
   margin: 4px 0; /* Adjust the vertical margin as needed */
 }
 
@@ -195,7 +190,7 @@ li {
   margin-bottom: 0.5em; /* Adds space between list items */
   padding-left: 1.25em; /* Adds padding inside the list items */
   position: relative; /* Allows us to position pseudo-elements */
-  font-size: 20px;
+  font-size: 25px;
 }
 
 li:before {
