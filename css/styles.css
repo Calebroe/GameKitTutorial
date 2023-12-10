@@ -189,3 +189,18 @@ code[class*="language-"], pre[class*="language-"] {
   -ms-hyphens: none;
   hyphens: none;
 }
+
+li {
+  list-style-type: none; /* Removes the default list-style */
+  margin-bottom: 0.5em; /* Adds space between list items */
+  padding-left: 1.25em; /* Adds padding inside the list items */
+  position: relative; /* Allows us to position pseudo-elements */
+  font-size: 20px;
+}
+
+li:before {
+  content: '•'; /* Adds a bullet point before the list item */
+  color: #ffdb3c; /* Sets the color of the bullet point */
+  position: absolute; /* Positions the bullet point absolutely within the list item */
+  left: 0; /* Aligns the bullet point to the left of the list item */
+}
