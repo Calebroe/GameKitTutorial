@@ -27,12 +27,13 @@
     </div>
   </nav>
   <main class="single-article-container">
+    <h1 class="article-title">Apple iOS GameKit Tutorial</h1> <!-- Large article title -->
     <div class="meta-container">
       <img class="avatar" src="assets/img/Caleb_Roe.jpeg" alt="Caleb Roe">
       <img class="avatar" src="assets/img/codypeyerk.jpg" alt="Cody Peyerk">
       <div class="post-meta">
         <p class="author">Caleb Roe | Cody Peyerk</p>
-        <p class="date">Dec 8, 2023 · 20 min read</p>
+        <p class="date">Dec 9, 2023 · 45 min read</p>
       </div>
     </div>
     <div class="article-container">
@@ -115,19 +116,22 @@
           class GameCenterHandler: ObservableObject {}          
         </code></pre>
         <br>
+        <p class="content">
         When creating a separate class for all of the Game Center handling like this 
         it is important  to make sure that only a single instance of the class is created 
         and passed around. To accomplish this we will create a singleton like so:
+        </p>
         <br>
         <br>
         <pre><code class="language-swift">
           static let shared = GameCenterHandler()         
         </code></pre>
         <br>
+        <p class="content">
         This “shared” variable will allow us to access this single instance of the GameCenterHandler class. 
         From here we will need two more variables before we can authenticate our player. Those being a variable
         containing the local player themself and a variable of type @Published to track whether the 
-        authentication view needs to be presented. This can be done like so:
+        authentication view needs to be presented. This can be done like so:</p>
         <br>
         <br> 
         <pre><code class="language-swift">
@@ -135,25 +139,13 @@
           @Published var isPresentingAuthView = false
         </code></pre>
         <br> 
-        From here we are now ready to authenticate the local player. This is done using 
-        the GKLocalPlayer.local instance property of “.authenticateHandler”. The authenticateHandler 
-        takes a completionHandler that gives two parameters with them being a viewController and an error. 
-        The viewController will have a value containing the view for the Game Center authentication if the 
-        user is not authenticated and a value of nil if they are authenticated. Likewise, the error will 
-        have a value if there is an error or nil if there is none. We can assign this property inside of the init() function like so:
-        <br>
-        <br> 
-        <pre><code class="language-swift">
-          var localPlayer = GKLocalPlayer.local
-          @Published var isPresentingAuthView = false
-        </code></pre>
-        <br>
+        <p class="content">
         From here we are now ready to authenticate the local player. This is done using the GKLocalPlayer.local
         instance property of “.authenticateHandler”. The authenticateHandler takes a completionHandler that 
         gives two parameters with them being a viewController and an error. The viewController will have a 
         value containing the view for the Game Center authentication if the user is not authenticated and a 
         value of nil if they are authenticated. Likewise, the error will have a value if there is an error 
-        or nil if there is none. We can assign this property inside of the init() function like so:
+        or nil if there is none. We can assign this property inside of the init() function like so:</p>
         <br>
         <br> 
         <pre><code class="language-swift">
@@ -173,6 +165,7 @@
         }    
         </code></pre>
         <br>
+        <p class="content">
         There are four main states we need to check for inside of the authenticateHandler, 
         with those being: if the viewController is not null, if the user is authenticated, 
         if the user isn’t authenticated, and if there is an error. The first is so we can 
@@ -186,7 +179,7 @@
         interchangeable but in general you should check for the viewController before checking 
         if the user is authenticated. You may also omit some of them if you have no need to do 
         anything more inside of the check such as how the check for if the player is authenticated 
-        is empty in the example code above.
+        is empty in the example code above.</p>
         <br>
         <br>
         </p>
@@ -194,19 +187,382 @@
       <section id="leaderboards">
         <h2>Leaderboards</h2>
         <p class="content">
-          <!-- References content goes here -->
-        </p>
+        Now, we will go back to the App Store Connect page for your app. 
+        Once inside of your app you will then go to the “Services” tab 
+        and on the left make sure you are under “Game Center”. From this location
+        we can now add leaderboards and achievements following the instructions below.
+        <br>
+        Scroll down to find the “Leaderboard” section. In this section you will want 
+        to click the “+” icon next to the title to create a new leaderboard.
+        <br>
+        <br>
+        <img src="assets/img/leaderboard.PNG" alt="leaderboard plus">
+        <br>
+        This will bring up a new screen asking the type of leaderboard you want to create. 
+        For this tutorial we will be focusing on the “Classic Leaderboard” type so select that.
+        <br>
+        <br>
+        <img src="assets/img/leaderboard_setup.PNG" alt="leaderboard plus">
+        <br>
+        On the next screen you will be presented with two more sections you will need to fill out. 
+        The first will require that you input a “Leaderboard Reference Name”, “LeaderboardID”, 
+        the “Score Format Type”, the “Score Submission Type”, the “Sort Order”, and an optional 
+        “Score Range”. The “Leaderboard Reference Name” is the name that will appear inside of 
+        the App Store Connect page. The “LeaderboardID” is an identifier that you will use to 
+        access the leaderboard inside of your code. The “Score Format Type” is the variable type 
+        that you want the leaderboard to use for its values. The “Score Submission Type” can either 
+        be the highest value or the most recent value. This is a personal preference for how you 
+        want your app’s leaderboard set up. The “Sort Order” is also a personal preference of sorting 
+        the leaderboard from low to high or high to low. Finally, there is the optional “Score Range” 
+        that will limit the values that can be input into the leaderboard. You may have noticed a 
+        checkbox at the top labeled “Archived” and this is a toggleable value that will disable the 
+        leaderboard from Game Center so users no longer have access to it. The leaderboard will still 
+        be on the App Store Connect page with all of the data but cannot be accessed by users until 
+        the box is unchecked again.
+        <br>
+        <br>
+        <img src="assets/img/leaderboard_setup2.PNG" alt="leaderboard plus">
+        <br>
+        The next section is for “Leaderboard Localization”. In this section you will need to 
+        add one or more language localizations for your leaderboard. After selecting the 
+        “Add Language” button you will be presented with a new pop-up with the fields “Language”,
+        “Name”, “Score Format”, “Score Format Suffix”, “Score Format Suffix (Plural)”, and an optional “Image”.
+        <br>
+        <br>
+        <img src="assets/img/leaderboard_setup3.PNG" alt="leaderboard plus">
+        <br>
+        First, select the language you want to use for this localization. Next, for the “Name” you 
+        will put in what you want the leaderboard’s name that will be displayed to the user. Next, 
+        the “Score Format” will be how the data is displayed on your app. For example, if it is 
+        money you will want it to be in the language’s typical currency. Next, both the “Score Format 
+        Suffix” and the plural version are additional text values that you can choose to enter. These 
+        will be placed next to the scores entered into the leaderboard so you can do things such as 
+        “1000 cookies” if you entered “cookies” for the plural version and “cookie” for the non-plural.
+        Finally, you may upload an image that will be displayed as the icon for the leaderboard.
+        <br>
+        <br>
+        <img src="assets/img/leaderboard_setup4.PNG" alt="leaderboard plus">
+        <br>
+        After setting up as many language localizations that you want you can now save the leaderboard you created and move on to code.
+        <br>
+        <br>
+        Once you are back in Xcode you will want to go back to the GameCenterHandler we created earlier. 
+        In here we will now want to create a function for reporting/uploading the score to the Game Center 
+        leaderboard we just created. To do this we will create a function called reportScore that takes 
+        in two parameters of the score type Int and the leaderboardID type String. This can be done like so:
+        <br>
+        <br>
+        <pre><code class="language-swift">
+          func reportScore(score: Int, leaderboardID: String) {}
+        </code></pre>
+        <br>
+        <br>
+      </p>
+      <p class="content">
+        The first step we will want to take inside this function is to check to make sure that the 
+        user is authenticated. This can be done using a simple if-statement to check the 
+        isAuthenticated field. We can do this either on the “GKLocalPlayer.local” or 
+        on the variable we created earlier of “localPlayer”. For example:
+        <pre><code class="language-swift">
+          if localPlayer.isAuthenticated {
+          } else {}       
+        </code></pre>
+        <br>
+        <br>
+      </p>
+      <p class="content">
+        Now we are ready to work on reporting the score. First, we will create a “GKLeaderboardScore()” 
+        object as a variable and assign three of its properties. The properties that we need to assign 
+        are the “leaderboardID”, the “value”, and the “player”. These will be assigned using the parameters 
+        that we pass to this function and the global variable of the localPlayer. This can be done like so:
+        <pre><code class="language-swift">
+          let leaderboardScore = GKLeaderboardScore()
+            leaderboardScore.leaderboardID = leaderboardID
+            leaderboardScore.value = score
+            leaderboardScore.player = self.localPlayer   
+        </code></pre>
+        <br>
+        <br>
+      </p>
+      <p class="content">
+        Now, similar to how we used the “.authenticateHandler” property, we will use the 
+        “GKLeaderboard.loadLeaderboards” property here. This property takes in two parameters of a string
+         array of IDs and a completion handler with two parameters of an array of GKLeaderboard and an 
+         error. For the first parameter that we need to give we will simply give an array with one value
+          of our leaderboardID. Once inside of the “.loadLeaderboards” property, we will need to check 
+          two conditions. First, if there is an error. This can be done by checking to see if the error 
+          parameter is not nil. Second, if the leaderboard exists. This can be done by checking if the 
+          leaderboards parameter is also not nil. This can be done like so:
+          <pre><code class="language-swift">
+            GKLeaderboard.loadLeaderboards(IDs: [leaderboardID]) { (leaderboards, error) in
+              if let error = error {
+                  print("Error loading leaderboards: \(error.localizedDescription)")
+                  return
+              }
+              guard let leaderboard = leaderboards?.first else {
+                  print("Leaderboard not found")
+                  return
+              }
+           }
+          </code></pre>
+          <br>
+          <br>
+      </p>
+      <p class="content">
+        Finally, we are ready to attempt to submit the score. This is done using the “GKLeaderboard.submitScore”
+        instance property inside of the “.loadLeaderboards” property we have above. The “.submitScore” property
+        can be placed below the guard statement. This property takes in the parameters of a “score” of type Int,
+        a “context” of type Int, a “player” of type GKPlayer, and a “completionHandler” that gives a parameter 
+        of an error. For the “score” we will pass in the “leaderboardScore.value” as an Int. For the context we
+        will simply pass in a 0. For the “player” we will pass in the “leaderboardScore.player”. Finally, for 
+        the “completionHandler” we will check to see if there is an error or not. All of this can be done like so:
+        <pre><code class="language-swift">
+          GKLeaderboard.submitScore(Int(leaderboardScore.value), context: 0, player: leaderboardScore.player, leaderboardIDs: [leaderboardScore.leaderboardID]) { (error) in
+            if let error = error {
+                print("Error reporting score: \(error.localizedDescription)")
+            } else {
+                print("Score reported successfully!")
+            }
+          }
+        </code></pre>
+        <br>
+        <br>
+      </p>
+      <p class="content">
+        Your final reportScore function should look something like so:
+        <pre><code class="language-swift">
+          func reportScore(score: Int, leaderboardID: String) {
+            if localPlayer.isAuthenticated {
+                let leaderboardScore = GKLeaderboardScore()
+                leaderboardScore.leaderboardID = leaderboardID
+                leaderboardScore.value = score
+                leaderboardScore.player = self.localPlayer
+                GKLeaderboard.loadLeaderboards(IDs: [leaderboardID]) { (leaderboards, error) in
+                    if let error = error {
+                        print("Error loading leaderboards: \(error.localizedDescription)")
+                        return
+                    }
+                    guard let leaderboard = leaderboards?.first else {
+                        print("Leaderboard not found")
+                        return
+                    }
+                    GKLeaderboard.submitScore(Int(leaderboardScore.value), context: 0, player: leaderboardScore.player, leaderboardIDs: [leaderboardScore.leaderboardID]) { (error) in
+                        if let error = error {
+                            print("Error reporting score: \(error.localizedDescription)")
+                        } else {
+                            print("Score reported successfully!")
+                        }
+                    }
+                }    
+              } else {
+                print("Player is not authenticated.")
+            }
+        }    
+        </code></pre>
+        <br>
+        <br>
+      </p>
+      <p class="content">
+        Now, you are ready to submit scores to the Game Center leaderboard by calling this function 
+        and passing in the score and leaderboardID. For example, we would call this function in our 
+        demo 2048 app when a user reaches the game over screen. A call to this function would look something like this:
+        <pre><code class="language-swift">
+          gameCenterHandler.reportScore(score: score, leaderboardID: "highestScore")
+        </code></pre>
+        <br>
+        <br>
+      </p>
+      <p class="content">
+        This would report the value of “score” to the leaderboard with the ID of “highestScore”.
+        That’s all! Now you are ready to create and use leaderboards in your own app!
+      </p>
+      <br>
+      <br>
       </section>
       <section id="achievements">
         <h2>Achievements</h2>
         <p class="content">
-          <!-- References content goes here -->
+          Scroll down to find the “Achievements” section. To create a new achievement 
+          you will want to click the “+” icon next to the title. 
+          <br>
+          <br>
+          <img src="assets/img/achievements_setup1.PNG" alt="leaderboard plus">
+          <br>
+          IMPORTANT NOTE: You can have a maximum of 100 achievements total. There is also 
+          a maximum of 1000 points you can allocate to all of your achievements total. 
+          <br>
+          <br>
+          On the next screen you will be presented with two sections you will need to fill out. 
+          The first section will have five main fields for you to fill out, with those being: 
+          “Achievement Reference Name”, “Achievement ID”, “Point Value”, “Hidden”, and “Achievable 
+          More Than Once”. There is also an additional “Archived” toggleable checkbox that works 
+          identically to the one that the leaderboards had. This means the achievement will be 
+          removed from Game Center and the players will no longer have access to it but it can 
+          be re-enabled inside of the App Store Connect at any time.
+          <br>
+          <br>
+          The “Achievement Reference Name” field will be the name shown inside of the App Store
+          Connect. The “Achievement ID” will be an identifier that is used to reference the 
+          achievement in your code. The “Point Value” field can be a value anywhere from 0-1000 
+          and that is how many points this achievement will be worth. It is important to remember 
+          that these 1000 points are cumulative for all of your achievements. The “Hidden” field 
+          will determine whether the achievement displays its title and pre-earned description or 
+          if it will hide this information until the player unlocks it. Finally, the “Achievable 
+          More Than Once” field will determine whether players can challenge others to obtain the 
+          achievement again even if they have already earned it.
+          <br>
+          <br>
+          <img src="assets/img/achievements_setup2.PNG" alt="leaderboard plus">
+          <br>
+          <br>
+          The next section is the “Achievement Localization” which is very similar to the “Leaderboard
+          Localization” we did earlier. You must add one or more language localizations for each 
+          achievement. To start we will select “Add Language”. Then, we will be prompted with a 
+          screen with five fields to enter. Those fields are: “Language”, “Title”, “Pre-earned 
+          Description”, “Earned Description”, and an “Image”. For the “Language” field simply select
+          the language of your choice. The “Title” field will be what the achievement will be called
+          and what is shown to the user. The “Pre-earned Description” is a short description that 
+          will appear to the user under the achievement before they have officially earned it. 
+          If the “Hidden” property was set to true then neither the “Title” nor the “Pre-earned 
+          Description” will be displayed to the user and instead they will see an achievement simply 
+          labeled “Hidden”. The “Earned Description” is another short description but will appear 
+          to the user under the achievement after they have officially earned it. Lastly is the “Image” 
+          field which is a small image file that will display as the icon for the achievement. 
+          Unlike the option leaderboard “Image” field, this “Image” field is required for all achievements.
+          <br>
+          <br>
+          <img src="assets/img/achievements_setup3.PNG" alt="leaderboard plus">
+          <br>
+          Now you can save the achievement and it will be created. You can repeat this process for as 
+          many achievements as you’d like up to a total of 100 achievements with a total of 1000 points. 
+          You do not need to create all 100 achievements nor do you need to fill in all 1000 points. 
+          Now we can move on to the code.
+          <br>
+          <br>
+          Once you are back in Xcode you will want to go back to the GameCenterHandler we created earlier. 
+          In here we will now want to create a function for reporting/uploading achievements to Game Center. 
+          To do this we will create a function called reportAchievement that takes in two parameters of the 
+          achievementID type String and the percentComplete type Double. This can be done like so:
+          <br>
+          <pre><code class="language-swift">
+            func reportAchievement(achievementID: String, percentComplete: Double) {}
+          </code></pre>
+          <br>
+          <br>
         </p>
+        <p class="content">
+          Now, once again, inside of this function we will want to ensure that the player is 
+          authenticated by performing a simple check. This can be done just the same as the reportScore function, like so:
+          <pre><code class="language-swift">
+            if localPlayer.isAuthenticated {}
+          </code></pre>
+          <br>
+          <br>
+        </p>
+        <p class="content">
+          Next, we will create a GKAchievement object using the “achievementID” we passed in as 
+          the identifier. We will set the property of “.percentComplete” using the “percentComplete” 
+          parameter we passed in. The “.showCompletionBanner” property will be set to true which will 
+          allow us to display a drop down to the user that lets them know they earned the achievement. 
+          For our demo app the achievements are either 0 percent complete or 100 percent complete but 
+          you can set progress on achievements as well. If you have achievements that you want to track 
+          progress of then you will want an if-statement to check if the “percentComplete” is 100 before 
+          setting the “.showsCompletionBanner” to true. All of this can be done like so:
+          <pre><code class="language-swift">
+            let achievement = GKAchievement(identifier: achievementID)
+              achievement.percentComplete = percentComplete
+              achievement.showsCompletionBanner = true
+          </code></pre> 
+          <br>
+          <br>
+        </p>
+        <p class="content">
+          Finally, we will use the “.report” function built into the GKAchievement class to report our achievement. 
+          This function takes two parameters of an array of type “GKAchievement” and a “completionHandler” that 
+          gives an error parameter. We will simply call this function, pass in our GKAchievement object we just 
+          created, and check to see if there is an error. This can be done like so:
+          <pre><code class="language-swift">
+            GKAchievement.report([achievement]) { (error) in
+              if let error = error {
+                  print("Error reporting achievement: \(error.localizedDescription)")
+              } else {
+                  print("Achievement reported successfully!")
+              }
+          }      
+          </code></pre> 
+          <br>
+          <br>
+        </p>
+        <p class="content">
+          Your final reportAchievement function should look something like this:
+          <pre><code class="language-swift">
+            func reportAchievement(achievementID: String, percentComplete: Double) {
+              if localPlayer.isAuthenticated {
+                  let achievement = GKAchievement(identifier: achievementID)
+                  achievement.percentComplete = percentComplete
+                  achievement.showsCompletionBanner = true 
+                  
+                  GKAchievement.report([achievement]) { (error) in
+                      if let error = error {
+                         print("Error reporting achievement: \(error.localizedDescription)")
+                      } else {
+                         print("Achievement reported successfully!")
+                      }
+                  }
+              } else {
+                  print("Player is not authenticated.")
+              }
+          }         
+          </code></pre> 
+          <br>
+          <br>
+        </p>
+        <p class="content">
+          Now you will need to call on this function when you need to report an achievement. 
+          It is important to create checks for your achievements in appropriate locations. 
+          For example, in our 2048 app we check for achievements in a few different locations. 
+          One of those is after each move to check what the highest tile is on the board 
+          and to give the player the appropriate achievement for that tile. This is done like so:
+          <pre><code class="language-swift">
+            checkForHighestTile()
+        
+            if highestTile >= 256 {
+                gameCenterHandler.reportAchievement(achievementID: "tile256", percentComplete: 100)
+            }
+            if highestTile >= 512 {
+                gameCenterHandler.reportAchievement(achievementID: "tile512", percentComplete: 100)
+            }
+            if highestTile >= 1024 {
+                gameCenterHandler.reportAchievement(achievementID: "tile1024", percentComplete: 100)
+            }
+            if highestTile >= 2048 {
+                gameCenterHandler.reportAchievement(achievementID: "tile2048", percentComplete: 100)
+            }
+          </code></pre> 
+          <br>
+          <br>
+        </p>
+        <p class="content">
+          These calls will report the achievements using the given identifiers and all with 100 percent completion.
+          That’s all! Now you are ready to create and use achievements in your own app!
+        </p>
+        <br>
+        <br>
       </section>
       <section id="references">
         <h2>References</h2>
         <p class="content">
-          <!-- References content goes here -->
+          Source Code for this tutorial can be found at: https://github.com/Calebroe/2048GameKit
+          <br>
+          <br>
+          We would like to thank these following resources for their educational contributions to our own study
+          in preparing and delivering this topic:
+          <br>
+          <br>
+          <li>Source Code: </li>
+          <li>Source Code: </li>
+          <li>Source Code: </li>
+          <li>Source Code: </li>
         </p>
       </section>
     </div>

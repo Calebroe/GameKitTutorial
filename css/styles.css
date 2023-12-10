@@ -14,7 +14,7 @@ body {
 }
 
 a {
-  color: #fff;
+  color: #ffdb3c;
 }
 
 /* nav */
@@ -33,7 +33,7 @@ nav .end {
 
 nav a {
   margin: 0 1rem;
-  font-size: 16px;
+  font-size: 30px;
 }
 
 .content img {
@@ -48,7 +48,7 @@ nav a {
 .single-article-container {
   margin-left: auto;
   margin-right: auto;
-  max-width: 45rem;
+  max-width: 75rem;
   padding: 1rem;
   min-height: 72vh;
 }
@@ -57,20 +57,36 @@ nav a {
   width: 100%; /* Ensures that the container fills its parent */
 }
 /* single article */
+.article-title {
+  font-size: 60px; /* This is a large size for the title, adjust as needed */
+  color: #3d8affb1; /* Optional: Adjust the color to make the title stand out */
+  text-align: center; /* Center the title */
+  margin-bottom: 1em; /* Add some space below the title */
+}
 
-article {
+.article {
   display: grid;
   grid-gap: 1rem;
 }
 
 article .title {
-  font-size: 40px;
+  font-size: 60px;
   line-height: 48px;
 }
 
-article div {
+.article div {
   display: flex;
   align-items: center;
+}
+
+h2 {
+  font-size: 60px; /* Increased from your current setting, adjust as needed */
+  margin-bottom: 0.5em; /* Adds some space below the section titles */
+}
+
+h3 {
+  font-size: 40px; /* Increased from your current setting, adjust as needed */
+  margin-bottom: 0.5em; /* Adds some space below the section titles */
 }
 
 .meta-container {
@@ -81,63 +97,23 @@ article div {
 
 .post-meta {
   display: grid;
-  grid-gap: 2px; /* Increase this value to add more space */
+  grid-gap: 4px; /* Increase this value to add more space */
 }
 
 .post-meta p {
-  font-size: 14px;
+  font-size:40px;
   margin: 4px 0; /* Adjust the vertical margin as needed */
 }
 
 .avatar {
-  width: 50px;
+  width: 115px;
   border-radius: 100%;
   margin-right: 1rem;
 }
 
-article p {
-  font-size: 21px;
-  line-height: 31px;
-}
-
-/* grid cards */
-
-.card {
-  /* background-color: #121212; */
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-gap: 2rem;
-}
-
-.card .title {
-  font-family: "Noto Sans" !important;
-  font-size: 25px;
-  font-weight: bold;
-  line-height: 35px;
-}
-
-.card .excrept {
-  font-family: "Noto Sans" !important;
-  font-size: 16px;
-  line-height: 24px;
-}
-
-.card .meta-container {
-  margin-top: 1rem;
-}
-
-.card .meta-container .date {
-  font-family: "Noto Sans" !important;
-}
-
-.card-body {
-  display: flex;
-  flex-direction: column;
-  grid-gap: 10px;
-}
-
-.card-body .post-meta {
-  grid-gap: 12px;
+p {
+  font-size: 24px; /* Increased from your current setting, adjust as needed */
+  line-height: 1.6; /* Adjust line height for better readability */
 }
 
 /* footer */
