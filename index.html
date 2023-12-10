@@ -549,6 +549,74 @@
         </p>
         <br>
         <br>
+        <h3>Showing Leaderboards and Achievements</h2>
+          <p class="content">
+            Now that we have properly setup and configured our code to enable and populate the Leaderboard
+            and Achievement overlays in Game Center, we want to make sure the user can open and display these.
+            We decided we would set this up by including buttons on our main menu screen, another alternative is to configure
+            your GameCenterHandler to present the GameCenter Overlay as a widget on select screens or all the screens.
+            Using the button approach is quite simple. First we create two functions we can call inside our MainScreen.swift 
+            that utilize the game state, setting to our GameCenterDelegate, and presenting to the rootViewController to display:
+            <pre><code class="language-swift">
+              // Function to show the achievements viewController
+              private func showAchievements() {
+                  guard let rootViewController = UIApplication.shared.windows.first?.rootViewController else { return }
+                  // Create GameCenterViewController with the state of .achievements
+                  let achievementsViewController = GKGameCenterViewController(state: .achievements)
+                  achievementsViewController.gameCenterDelegate = gameCenterDelegate
+                  // Present the achievementsViewController
+                  rootViewController.present(achievementsViewController, animated: true, completion: nil)
+              }
+
+              // Function to show the leaderboard viewController
+              private func showLeaderboard() {
+                  guard let rootViewController = UIApplication.shared.windows.first?.rootViewController else { return }
+                  // Create GameCenterViewController with the state of .leaderboards
+                  let leaderboardViewController = GKGameCenterViewController(state: .leaderboards)
+                  leaderboardViewController.gameCenterDelegate = gameCenterDelegate
+                  // Hardcode the leaderboardIdentifier since we only have one leaderboard
+                  leaderboardViewController.leaderboardIdentifier = "highestScore"
+                  // Present the leaderboardViewController
+                  rootViewController.present(leaderboardViewController, animated: true, completion: nil)
+              }
+            </code></pre> 
+            <br>
+            <br>
+          </p>
+          <p class="content">
+            Now the last thing to do is create the buttons in a SwiftUI Vstack:
+            <pre><code class="language-swift">
+              // Lower Leaderboard and Achievements buttons
+                VStack {
+                    HStack {
+                        Button("LeaderBoard") {
+                            // Action to show leaderboard
+                            showLeaderboard()
+                        }
+                        .padding()
+
+                        Button("Achievements") {
+                            // Action to show achievements
+                            showAchievements()
+                        }
+                        .padding()
+                    }
+                    .padding(.bottom, 0) // Moves the HStack lower down on the screen
+                }
+            </code></pre> 
+            <br>
+            <br>
+          </p>
+          <p class="content">
+            Finally, here is what our new LeaderBoard and Achievement overlays look like after implementing:
+            <br>
+            <br>
+            <div class="image-container">
+              <img src="/assets/img/simulator_leaderboards.png" alt="Leaderboard" class="side-by-side">
+              <img src="/assets/img/simulator_achievements.png" alt="Achievement" class="side-by-side">
+            </div>            
+          </p>
+        </section>
       </section>
       <section id="conclusion">
         <h2>Conclusion</h2>

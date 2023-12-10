@@ -204,3 +204,17 @@ li:before {
   position: absolute; /* Positions the bullet point absolutely within the list item */
   left: 0; /* Aligns the bullet point to the left of the list item */
 }
+
+.image-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.side-by-side {
+  width: 48%; /* Adjust the width to fit side by side, including some space between */
+  margin: 0.5em; /* Adds space around the image */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: adds a shadow for depth */
+  border-radius: 4px; /* Optional: rounds the corners of the images */
+}
